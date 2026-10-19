@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Portfolio de Noa Nied, alternant en cybersécurité et administration d'infrastructures sécurisées.">
+<title>Noa Nied — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout : dossier d'audit — colonne de lecture + marge "log" en mono, sections calées sur le référentiel AIS */
+:root{
+  --bg:#eef1f5; --surface:#ffffff; --ink:#111a2b; --muted:#56627a; --line:#d3d9e3;
+  --accent:#1f4fd6; --accent-soft:#e1e8fb; --ok:#127a4b; --warn:#b4650a;
+  --f-display:"Syne","Arial Black",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c111c; --surface:#141b2a; --ink:#e7ecf5; --muted:#93a0b8; --line:#26304a;
+  --accent:#7aa2ff; --accent-soft:#1a2645; --ok:#4cc58b; --warn:#f0a54a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c111c; --surface:#141b2a; --ink:#e7ecf5; --muted:#93a0b8; --line:#26304a;
+  --accent:#7aa2ff; --accent-soft:#1a2645; --ok:#4cc58b; --warn:#f0a54a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.04em}
+.label{font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+h2{font-size:clamp(1.6rem,3.4vw,2.2rem);letter-spacing:-.01em}
+h3{font-size:1.12rem;font-weight:700}
+p{margin:0}
+
+/* Hero */
+header{padding-block:56px 40px;border-bottom:1px solid var(--line)}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:.78rem;color:var(--ok);border:1px solid var(--line);background:var(--surface);padding:5px 12px;border-radius:999px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--ok);display:block;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.status i{animation:none}}
+h1{font-size:clamp(2.8rem,9vw,5.6rem);font-weight:800;line-height:.95;letter-spacing:-.03em;margin-top:22px}
+h1 span{color:var(--accent)}
+.role{font-size:clamp(1.1rem,2.4vw,1.4rem);max-width:40ch;margin-top:18px;font-weight:500}
+.meta{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:28px}
+.meta div{display:flex;flex-direction:column;gap:2px}
+.meta b{font-weight:500;font-size:.95rem;user-select:all}
+
+/* Sections */
+section{padding-block:56px;border-bottom:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:baseline;margin-bottom:32px}
+@media (max-width:720px){.sec-head{grid-template-columns:1fr;gap:6px}}
+.lead{color:var(--muted);max-width:65ch;margin-top:10px}
+
+/* Pitch */
+.pitch{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:760px){.pitch{grid-template-columns:1fr}}
+.pitch div{background:var(--surface);border:1px solid var(--line);padding:20px;border-radius:6px;display:flex;flex-direction:column;gap:6px}
+.pitch strong{font-family:var(--f-display);font-size:1.5rem}
+
+/* AIS */
+.ais{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.ais-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:20px 22px;border-bottom:1px solid var(--line)}
+.ais-row{display:grid;grid-template-columns:1fr auto;gap:16px;padding:18px 22px;border-bottom:1px solid var(--line)}
+.ais-row:last-child{border-bottom:0}
+.ais-row ul{margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:.92rem}
+.pill{font-family:var(--f-mono);font-size:.72rem;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);white-space:nowrap;align-self:start}
+.pill.ok{color:var(--ok);background:transparent;border:1px solid var(--ok)}
+
+/* Timeline */
+.tl{display:flex;flex-direction:column}
+.job{display:grid;grid-template-columns:180px 1fr;gap:24px;padding-block:22px;border-top:1px solid var(--line)}
+.job:first-child{border-top:0;padding-top:0}
+@media (max-width:720px){.job{grid-template-columns:1fr;gap:6px}}
+.job ul{margin:10px 0 0;padding-left:18px}
+.job li{margin-bottom:4px}
+.org{color:var(--muted);font-size:.95rem}
+
+/* Projects */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.filters button{font-family:var(--f-mono);font-size:.78rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:6px 14px;border-radius:999px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.proj{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.proj.feature{grid-column:1/-1;border-color:var(--accent)}
+.proj .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.proj p{color:var(--muted);font-size:.95rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tags span{font-family:var(--f-mono);font-size:.7rem;border:1px solid var(--line);padding:2px 8px;border-radius:4px;color:var(--muted)}
+
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+@media (max-width:820px){.skills{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.skills{grid-template-columns:1fr}}
+.skills h3{font-size:1rem;margin-bottom:10px}
+.skills ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.skills li{display:flex;justify-content:space-between;gap:10px;font-size:.93rem;border-bottom:1px dashed var(--line);padding-bottom:5px}
+.lvl{font-family:var(--f-mono);font-size:.75rem;color:var(--accent);white-space:nowrap}
+
+/* Contact */
+.contact{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.copy{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;min-width:0}
+.copy b{font-family:var(--f-mono);font-weight:500;font-size:.92rem;user-select:all;overflow-wrap:anywhere}
+.copy button{font-family:var(--f-mono);font-size:.72rem;background:var(--accent);color:var(--surface);border:0;border-radius:4px;padding:6px 10px;cursor:pointer}
+footer{padding-block:28px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="status"><i></i>Disponible · alternance cybersécurité · fin nov. 2026</span>
+    <h1>Noa<br><span>Nied</span></h1>
+    <p class="role">Technicien systèmes &amp; réseaux en alternance, je me spécialise en cybersécurité : durcissement, détection et conformité.</p>
+    <div class="meta">
+      <div><span class="label">Formation</span><b>Mastère Cybersécurité &amp; Cloud — IPSSI Nice</b></div>
+      <div><span class="label">Rythme</span><b>3 sem. entreprise / 1 sem. école</b></div>
+      <div><span class="label">Durée</span><b>2 ans</b></div>
+      <div><span class="label">Zone</span><b>Alpes-Maritimes · permis B</b></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="profil">
+  <div class="wrap">
+    <div class="sec-head"><span class="label">Profil</span><div><h2>Ce que j'apporte</h2>
+      <p class="lead">Un an d'expérience terrain dans une ESN qui sert de DSI externe à ses clients, plus trois stages et projets techniques. Je connais l'infra de l'intérieur, ce qui m'aide à la sécuriser concrètement.</p></div></div>
+    <div class="pitch">
+      <div><span class="label">Terrain</span><strong>N1 → N2</strong><p>Support, MCO serveurs, AD/O365, sauvegardes, interventions sur site chez des clients.</p></div>
+      <div><span class="label">Sécurité</span><strong>Blue &amp; red</strong><p>Hardening AD, pfSense + IDS, DevSecOps, pentest et analyse de trafic malveillant.</p></div>
+      <div><span class="label">Conformité</span><strong>SOC / EDR / SIEM</strong><p>Analyse d'écarts et comparatif de solutions pour un client soumis à des exigences de sécurité.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="ais">
+  <div class="wrap">
+    <div class="sec-head"><span class="label">Certification</span><div><h2>Titre pro AIS — niveau 6</h2>
+      <p class="lead">Administrateur d'infrastructures sécurisées (RNCP, TP-01352). Les trois activités-types sont validées dans mon livret d'évaluations en cours de formation, signé le 28/08/2026.</p></div></div>
+    <div class="ais">
+      <div class="ais-top"><span class="mono">Livret ECF · IPSSI · formateur P.-Y. Poirier</span><span class="pill ok">3 / 3 activités maîtrisées</span></div>
+      <div class="ais-row"><div><h3>1 · Administrer et sécuriser les infrastructures</h3>
+        <ul><li>Windows Server 2025 : AD, GPO, DNS/DHCP, NTFS, WSUS, sync Entra ID</li><li>Linux : iptables, SSH, NAS NFS/Samba, Apache/Nginx, Docker/LXC</li><li>Cisco : VLAN, VTP, OSPF/EIGRP, EtherChannel, VPN IPsec</li><li>VMware vSphere (DRS, HA, FT) et cluster Proxmox VE</li><li>PKI Windows, cluster Hyper-V, HAProxy, Pacemaker/Corosync, Ansible</li><li>Azure (NSG, RBAC) et AWS (EC2, S3, ELB)</li></ul></div><span class="pill">Validé</span></div>
+      <div class="ais-row"><div><h3>2 · Concevoir une solution pour un besoin d'évolution</h3>
+        <ul><li>Hackathon : infra haute dispo pfSense, DMZ, proxy, VPN, CARP, IDS Suricata</li><li>Gestion de projet : cadrage, cahier des charges, cycle en V, agile</li><li>Supervision Zabbix : KPI, alertes, résolution structurée d'incidents</li></ul></div><span class="pill">Validé</span></div>
+      <div class="ais-row"><div><h3>3 · Participer à la gestion de la cybersécurité</h3>
+        <ul><li>Méthodes de hacking, ANSSI / CERT / CVE, malwares, pentest</li><li>DevSecOps : gouvernance, risques, conformité, journalisation, réponse à incident</li><li>Durcissement AD : SMBv1, NTLMv1, LM, GPO, audit PingCastle et Purple Knight</li></ul></div><span class="pill">Validé</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="wrap">
+    <div class="sec-head"><span class="label">Réalisations</span><div><h2>Projets choisis</h2>
+      <p class="lead">Missions en entreprise et projets d'école, triés par domaine.</p></div></div>
+    <div class="filters" role="group" aria-label="Filtrer les projets">
+      <button id="f-all" data-f="all" aria-pressed="true">Tout</button>
+      <button id="f-def" data-f="def" aria-pressed="false">Défense &amp; conformité</button>
+      <button id="f-off" data-f="off" aria-pressed="false">Offensif &amp; analyse</button>
+      <button id="f-infra" data-f="infra" aria-pressed="false">Infra &amp; automatisation</button>
+    </div>
+    <div class="grid" id="grid">
+      <article class="proj feature" data-c="def">
+        <div class="top"><h3>Programme de conformité SOC pour un client</h3><span class="label">Parthena · 2026</span></div>
+        <p>Un client coopératif devait répondre à des exigences fortes : surveillance SOC, EDR, SIEM, alertes en temps réel, audits d'incidents et références ANSSI. J'ai construit l'analyse d'écarts, comparé les solutions et préparé les propositions client. Conclusion clé : s'appuyer sur un prestataire SOC qualifié PDIS plutôt que monter un SOC 24/7 en interne.</p>
+        <div class="tags"><span>Wazuh</span><span>Symantec SES</span><span>Stormshield</span><span>Zabbix</span><span>GLPI</span><span>Beemo</span><span>PDIS</span><span>ANSSI</span></div>
+      </article>
+      <article class="proj" data-c="def">
+        <div class="top"><h3>Hackathon infra sécurisée</h3><span class="label">IPSSI · mai 2026</span></div>
+        <p>Firewall pfSense en haute dispo (CARP), DMZ, proxy à filtrage catégoriel, VPN et IDS. On a ensuite provoqué des attaques pour vérifier qu'elles étaient détectées.</p>
+        <div class="tags"><span>pfSense</span><span>Suricata</span><span>OpenVPN</span><span>WireGuard</span><span>CARP</span></div>
+      </article>
+      <article class="proj" data-c="def">
+        <div class="top"><h3>Durcissement Active Directory</h3><span class="label">IPSSI · 2026</span></div>
+        <p>Audit d'un annuaire avec PingCastle et Purple Knight, suppression des protocoles hérités et durcissement par GPO.</p>
+        <div class="tags"><span>PingCastle</span><span>Purple Knight</span><span>GPO</span><span>NTLM</span><span>SMBv1</span></div>
+      </article>
+      <article class="proj" data-c="def">
+        <div class="top"><h3>Série DevSecOps (TP1 à TP4)</h3><span class="label">IPSSI · 2026</span></div>
+        <p>SBOM et scan de vulnérabilités sur OWASP Juice Shop, durcissement SSH automatisé avec Ansible, recherche de secrets et de mauvaises configurations Dockerfile, puis Policy as Code.</p>
+        <div class="tags"><span>Syft</span><span>Grype</span><span>Trivy</span><span>Ansible</span><span>OPA/Rego</span><span>Conftest</span></div>
+      </article>
+      <article class="proj" data-c="def">
+        <div class="top"><h3>Gestion de crise Apocal'IPSSI</h3><span class="label">IPSSI · juil. 2026</span></div>
+        <p>Simulation sur plusieurs jours pour un client pharma fictif : dossiers d'architecture, schémas réseau avec bascule vers un cloud souverain HDS et gestion de scénarios de crise.</p>
+        <div class="tags"><span>Gestion de crise</span><span>OVHcloud HDS</span><span>Architecture</span></div>
+      </article>
+      <article class="proj" data-c="off">
+        <div class="top"><h3>Analyse de trafic C2</h3><span class="label">IPSSI</span></div>
+        <p>Analyse d'une capture pcap pour identifier les communications d'un malware avec son serveur de commande.</p>
+        <div class="tags"><span>Wireshark</span><span>Malware</span><span>C2</span></div>
+      </article>
+      <article class="proj" data-c="off">
+        <div class="top"><h3>OSINT et reconnaissance passive</h3><span class="label">IPSSI</span></div>
+        <p>Collecte d'informations sur une cible sans interaction directe avec ses systèmes.</p>
+        <div class="tags"><span>Google Dorks</span><span>Shodan</span><span>theHarvester</span></div>
+      </article>
+      <article class="proj" data-c="off">
+        <div class="top"><h3>Tests d'intrusion</h3><span class="label">IPSSI</span></div>
+        <p>Brute force, failles XSS et exploitation en lab, depuis Kali Linux.</p>
+        <div class="tags"><span>Kali</span><span>Hydra</span><span>Burp Suite</span><span>Metasploit</span></div>
+      </article>
+      <article class="proj" data-c="infra">
+        <div class="top"><h3>FreeMotions — projet de titre AIS</h3><span class="label">IPSSI · 2026</span></div>
+        <p>Déploiement complet d'une infrastructure deux sites (Paris / Lyon) sous Proxmox : plan VLAN, inventaire des VM, Gantt, schémas réseau, RACI et budget.</p>
+        <div class="tags"><span>Proxmox</span><span>VLAN</span><span>RACI</span><span>Gantt</span></div>
+      </article>
+      <article class="proj" data-c="infra">
+        <div class="top"><h3>Déploiement Zabbix Agent 2 sur parc hétérogène</h3><span class="label">Parthena</span></div>
+        <p>Script PowerShell compatible avec les vieux serveurs, jusqu'à Windows Server 2008 R2 en PowerShell 2.0, corrigé version après version.</p>
+        <div class="tags"><span>PowerShell</span><span>Zabbix</span><span>Legacy</span></div>
+      </article>
+      <article class="proj" data-c="infra">
+        <div class="top"><h3>Migration ESXi vers Proxmox</h3><span class="label">Grimaldi Forum · 2025</span></div>
+        <p>Participation à la migration de l'hyperviseur et à la sécurisation du réseau du site.</p>
+        <div class="tags"><span>ESXi</span><span>Proxmox</span><span>Réseau</span></div>
+      </article>
+      <article class="proj" data-c="infra">
+        <div class="top"><h3>WDS et supervision Zabbix</h3><span class="label">Areco · 2024</span></div>
+        <p>Mise en place d'un serveur de déploiement de postes et d'une supervision Zabbix.</p>
+        <div class="tags"><span>WDS</span><span>Zabbix</span><span>Windows Server</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="parcours">
+  <div class="wrap">
+    <div class="sec-head"><span class="label">Parcours</span><div><h2>Expériences</h2></div></div>
+    <div class="tl">
+      <div class="job"><span class="mono">nov. 2025 → nov. 2026<br>Alternance</span><div>
+        <h3>Technicien systèmes et réseaux</h3><p class="org">Parthena Consultant · DSI externalisée</p>
+        <ul><li>Support et hotline N1/N2</li><li>MCO des serveurs, gestion AD et Office 365</li><li>Stratégies de sauvegarde, tests d'intégrité et restauration</li><li>Interventions sur site : bornes WiFi, onduleurs, équipements réseau</li><li>Études de sécurité pour les clients (SOC, EDR, SIEM)</li></ul></div></div>
+      <div class="job"><span class="mono">mai → août 2025<br>Stage</span><div>
+        <h3>Technicien informatique</h3><p class="org">Grimaldi Forum Monaco</p>
+        <ul><li>Installation des postes, gestion des comptes, rédaction de procédures</li><li>Support utilisateur N2</li><li>Migration ESXi vers Proxmox et sécurisation réseau</li></ul></div></div>
+      <div class="job"><span class="mono">juil. → oct. 2024<br>Stage</span><div>
+        <h3>Support informatique N2</h3><p class="org">Areco</p>
+        <ul><li>Serveur WDS et supervision Zabbix</li><li>Administration et sécurisation réseau</li><li>Windows Server et Active Directory</li></ul></div></div>
+      <div class="job"><span class="mono">depuis oct. 2023<br>Formation</span><div>
+        <h3>IPSSI Nice</h3><p class="org">Bachelor informatique, puis Mastère Cybersécurité &amp; Cloud</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="wrap">
+    <div class="sec-head"><span class="label">Compétences</span><div><h2>Boîte à outils</h2></div></div>
+    <div class="skills">
+      <div><h3>Sécurité</h3><ul>
+        <li>VPN, firewall, segmentation<span class="lvl">●●●●○</span></li>
+        <li>Durcissement (WAF, SSH, AD)<span class="lvl">●●●●○</span></li>
+        <li>Pentest (Kali, Burp, Metasploit)<span class="lvl">●●●●○</span></li>
+        <li>DevSecOps (Trivy, Grype, OPA)<span class="lvl">●●●○○</span></li>
+        <li>Supervision Zabbix<span class="lvl">●●●○○</span></li></ul></div>
+      <div><h3>Systèmes &amp; réseau</h3><ul>
+        <li>Windows Server (AD, GPO)<span class="lvl">●●●●○</span></li>
+        <li>Linux (hardening, services)<span class="lvl">●●●●○</span></li>
+        <li>VLAN, routage, DHCP, DNS<span class="lvl">●●●●○</span></li>
+        <li>Cisco<span class="lvl">●●●●○</span></li>
+        <li>Proxmox · VMware ESXi<span class="lvl">●●●○○</span></li>
+        <li>Azure · AWS<span class="lvl">●●●○○</span></li></ul></div>
+      <div><h3>Code &amp; langues</h3><ul>
+        <li>Python · PowerShell · Bash<span class="lvl">●●●○○</span></li>
+        <li>JavaScript · PHP · SQL<span class="lvl">●●●○○</span></li>
+        <li>C / C++<span class="lvl">●●●●○</span></li>
+        <li>Anglais<span class="lvl">B1</span></li>
+        <li>Italien<span class="lvl">B1+</span></li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:0">
+  <div class="wrap">
+    <div class="sec-head"><span class="label">Contact</span><div><h2>Parlons de votre alternance</h2>
+      <p class="lead">Je cherche une alternance en cybersécurité (SOC, sécurité des infrastructures, GRC) dans les Alpes-Maritimes ou en télétravail partiel.</p></div></div>
+    <div class="contact">
+      <div class="copy"><b id="mail">noa.nied11@gmail.com</b><button id="c-mail" data-t="mail">Copier</button></div>
+      <div class="copy"><b id="tel">06 31 64 15 09</b><button id="c-tel" data-t="tel">Copier</button></div>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap mono">Noa Nied · portfolio 2026</div></footer>
+
+<script>
+const btns=document.querySelectorAll('.filters button');
+btns.forEach(b=>b.addEventListener('click',()=>{
+  btns.forEach(x=>x.setAttribute('aria-pressed',x===b));
+  const f=b.dataset.f;
+  document.querySelectorAll('#grid .proj').forEach(p=>{p.hidden=!(f==='all'||p.dataset.c===f)});
+}));
+document.querySelectorAll('.copy button').forEach(b=>b.addEventListener('click',()=>{
+  const el=document.getElementById(b.dataset.t);const t=el.textContent;
+  const done=()=>{b.textContent='Copié';setTimeout(()=>b.textContent='Copier',1500)};
+  try{navigator.clipboard.writeText(t).then(done,()=>sel(el))}catch(e){sel(el)}
+}));
+function sel(el){const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)}
+</script>
+</body>
+</html>
